@@ -1,1 +1,86 @@
+describe('HOMEWORK', () => {
+    it('Test Case 01 - Validate the Contact Us information', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('.is-size-3').contains('Contact Us')
+    } )
+    it('Test Case 02 - Validate the Full name input box', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('input[class="input"]').should('be.visible').and('have.attr', 'required')
+        cy.get(':nth-child(1) > .control > .input').parent().parent().should('have.text', 'Full name *')
+        cy.get(':nth-child(1) > .control > .input').should('have.attr', 'placeholder').should('eq', 'Enter your full name')
+    } )
+    it('Test Case 03 - Validate the Gender radio button', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('.control > .label').should('have.text', 'Gender *')
+        cy.get('input[type="radio"]').should('have.attr', 'required')
+        cy.get('label[class="radio"]').should('have.text', 'Male')
+        .next().should('have.text', 'Female')
+        .next().should('have.text', 'Prefer not to disclose')
+        /*
+        Validate the options are clickable and not selected
+        Click on the “Male” option and validate it is selected while the others are not selected
+        Click on the “Female” option and validate it is selected while the others are not selected
+        */
+    } )
+    it('Test Case 04 - Validate the Address input box', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('input[class="input"]').eq(1).should('be.visible')
+        /*
+        3- Validate that the Address input box is not required
+        */
+        cy.get('input[placeholder="Enter your address"]').parent().parent().should('have.text', 'Address')
+        cy.get('input[placeholder="Enter your address"]')
+    } )
+    it('Test Case 05 - Validate the Email input box', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('input[placeholder="Enter your email"]').should('be.visible').and('have.attr', 'required')
+        cy.get('input[placeholder="Enter your email"]').parent().parent().should('have.text', 'Email *')
+        cy.get('input[placeholder="Enter your email"]').should('have.attr', 'placeholder').should('eq', 'Enter your email')
+    } )
+    it('Test Case 06 - Validate the Phone input box', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('input[placeholder="Enter your phone number"]').should('be.visible')
+        /*
+        3-Validate that the Phone input box is not required
+        */
+        cy.get('input[placeholder="Enter your phone number"]').parent().parent().should('have.text', 'Phone')
+        cy.get('input[placeholder="Enter your phone number"]').should('have.attr', 'placeholder').should('eq', 'Enter your phone number')
+    } )
+    it('Test Case 07 - Validate the Message text area', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('textarea[placeholder="Type your message here..."]').should('be.visible')
+        /*
+        3-Validate that the Message text area is not required
+        */
+        cy.get('textarea[placeholder="Type your message here..."]').parent().parent().should('have.text', 'Message')
+        cy.get('textarea[placeholder="Type your message here..."]').should('have.attr', 'placeholder').should('eq', 'Type your message here...')
+    } )
+    it('Test Case 08 - Validate the Consent checkbox', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('label').contains('I give my consent to be contacted.')
+        cy.get('input[type="checkbox"]').should('have.attr', 'required')
+        cy.get('input[type="checkbox"]').should('be.enabled')
+        cy.get('input[type="checkbox"]').click().should('be.checked').click().should('not.be.checked')
+    } )
+    it('Test Case 09 - Validate the SUBMIT button', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get('.control > .button').should('be.visible').should('be.enabled').contains('SUBMIT')
+    } )
+    it.only('Test Case 10 - Validate the form submission', () => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+        cy.get(':nth-child(1) > .control > .input').type('Yunus Emre Cansever')
+        cy.get('.control > :nth-child(2)').click()
+        cy.get(':nth-child(3) > .control > .input').type('3817 W Granville Ave, Chicago, IL, 60659')
+        cy.get(':nth-child(4) > .control > .input').type('yunuscansever@proton.me')
+        cy.get(':nth-child(5) > .control > .input').type('5512096004')
+        cy.get('.textarea').type('Such a world my brother.')
+        cy.get('.checkbox > input').click()
+        cy.get('button[type="submit"]').click()
+        cy.contains('Thanks for submitting!').should('be.visible')
+
+    } )
+
+})
+
+
 
